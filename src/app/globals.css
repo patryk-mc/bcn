@@ -1,26 +1,267 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =============================================================
+   BCN Ideal Services - "Purity & Precision" Design System
+   Sourced from Stitch project design tokens.
+   ============================================================= */
+
+@theme {
+  /* Brand color palette */
+  --color-primary: #1c3b6f;
+  --color-primary-container: #365388;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #afc8ff;
+  --color-primary-fixed: #d8e2ff;
+  --color-primary-fixed-dim: #adc7ff;
+
+  --color-secondary: #4a5f81;
+  --color-secondary-container: #c3d8ff;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #495e80;
+
+  --color-tertiary: #513800;
+  --color-tertiary-container: #6f4e00;
+  --color-on-tertiary: #ffffff;
+
+  --color-accent-gold: #c5a059;
+  --color-accent-gold-soft: #e6c98a;
+
+  --color-background: #faf9fe;
+  --color-on-background: #1a1b1f;
+
+  --color-surface: #faf9fe;
+  --color-surface-dim: #dad9de;
+  --color-surface-bright: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f3f8;
+  --color-surface-container: #eeedf2;
+  --color-surface-container-high: #e9e7ed;
+  --color-surface-container-highest: #e3e2e7;
+  --color-on-surface: #1a1b1f;
+  --color-on-surface-variant: #44474f;
+
+  --color-outline: #747780;
+  --color-outline-variant: #c4c6d1;
+
+  --color-inverse-surface: #2f3034;
+  --color-inverse-on-surface: #f1f0f5;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+
+  /* Typography */
+  --font-display: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+
+  /* Spacing */
+  --container-max: 1280px;
+
+  /* Radii (Purity & Precision is friendly-rounded) */
+  --radius-card: 24px;
+  --radius-button: 12px;
+  --radius-pill: 9999px;
+
+  /* Custom animations */
+  --animate-drift: drift 30s ease-in-out infinite;
+  --animate-bubble-float: bubble-float 8s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-scale-in: scale-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-marquee: marquee 40s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Keyframes referenced by --animate-* */
+@keyframes drift {
+  0%, 100% { transform: scale(1.04) translate(0, 0); }
+  50% { transform: scale(1.12) translate(-1%, -1.5%); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes bubble-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(8px, -12px) scale(1.03); }
+  66% { transform: translate(-6px, 6px) scale(0.98); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Base styles */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility classes used across components */
+@utility glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+@utility glass-strong {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+}
+
+@utility glass-dark {
+  background: rgba(28, 59, 111, 0.6);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+@utility clean-elevation {
+  box-shadow: 0 10px 30px -8px rgba(28, 59, 111, 0.06),
+              0 2px 6px -2px rgba(28, 59, 111, 0.04);
+}
+
+@utility clean-elevation-hover {
+  box-shadow: 0 24px 50px -12px rgba(28, 59, 111, 0.18),
+              0 6px 14px -4px rgba(28, 59, 111, 0.08);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.022em;
+  font-weight: 700;
+}
+
+@utility text-headline {
+  font-family: var(--font-display);
+  letter-spacing: -0.012em;
+  font-weight: 600;
+}
+
+@utility text-eyebrow {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+@utility container-prose {
+  max-width: 72ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Custom selection */
+::selection {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Custom scrollbar (subtle) */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(28, 59, 111, 0.2);
+  border-radius: 9999px;
+  border: 2px solid var(--color-background);
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(28, 59, 111, 0.4); }
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Prose styling for blog posts */
+.prose-bcn {
+  font-family: var(--font-body);
+  color: var(--color-on-surface);
+  line-height: 1.75;
+  font-size: 18px;
+}
+.prose-bcn h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.25;
+  letter-spacing: -0.018em;
+  color: var(--color-primary);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+.prose-bcn h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--color-primary);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-bcn p { margin-bottom: 1.25rem; color: var(--color-on-surface-variant); }
+.prose-bcn a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: rgba(28, 59, 111, 0.4);
+  text-underline-offset: 3px;
+}
+.prose-bcn a:hover { text-decoration-color: var(--color-primary); }
+.prose-bcn ul, .prose-bcn ol { padding-left: 1.4rem; margin-bottom: 1.25rem; color: var(--color-on-surface-variant); }
+.prose-bcn li { margin-bottom: 0.5rem; }
+.prose-bcn ul li { list-style-type: disc; }
+.prose-bcn ol li { list-style-type: decimal; }
+.prose-bcn strong { color: var(--color-primary); font-weight: 600; }
+.prose-bcn blockquote {
+  border-left: 3px solid var(--color-accent-gold);
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0;
+  font-style: italic;
+  background: rgba(197, 160, 89, 0.06);
+  border-radius: 0 12px 12px 0;
+  color: var(--color-on-surface);
+}
+.prose-bcn img {
+  border-radius: 16px;
+  margin: 2rem 0;
+}
+.prose-bcn hr {
+  border: none;
+  height: 1px;
+  background: var(--color-outline-variant);
+  margin: 2.5rem 0;
+}
+.prose-bcn code {
+  background: var(--color-surface-container);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
 }

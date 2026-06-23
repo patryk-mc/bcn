@@ -148,6 +148,16 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/news" className="text-white/80 hover:text-white transition-colors">
+                  News
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-white/80 hover:text-white transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
                 <Link href="/about#careers" className="text-white/80 hover:text-white transition-colors">
                   Apply for a job
                 </Link>

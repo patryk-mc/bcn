@@ -27,12 +27,14 @@ export const site = {
 } as const;
 
 export const nav = [
+  { label: "News", href: "/news" },
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Process", href: "/process" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
+  { label: "FAQ", href: "/faq" },
 ] as const;
 
 export type ServiceSlug = "home-cleaning" | "company-cleaning" | "uhnw";
@@ -246,5 +248,33 @@ export const processSteps = [
     n: "05",
     title: "Ongoing support",
     body: "WhatsApp us anytime. We swap, scale or pause service as your life changes.",
+  },
+] as const;
+
+/**
+ * Frequently asked questions. Single source of truth, rendered both as the
+ * accordion at the bottom of the homepage and on the dedicated `/faq` page.
+ * Edit here to update both places at once.
+ */
+export const faqs = [
+  {
+    q: "What services do expats in Barcelona typically need when settling into a new home?",
+    a: "Expats in Barcelona often require more than just cleaning—they need reliable household support, trusted staff, and structured help managing day-to-day life. BCN Ideal Services works with international families to provide cleaning, childcare support, and ongoing household coordination, ensuring a smooth transition into life in the city. Our services are designed to remove friction so expats can focus on work, family, and settling in comfortably.",
+  },
+  {
+    q: "Do you offer UHNW household support services in Barcelona?",
+    a: "Yes. BCN Ideal Services provides discreet UHNW lifestyle support in Barcelona for high-net-worth individuals and families who require a higher level of household management. This includes staffing coordination, vendor management, private bookings, estate support, and confidential day-to-day assistance delivered under NDA. Each service is fully tailored to the client's lifestyle and expectations.",
+  },
+  {
+    q: "How do expats in Barcelona find trusted household staff?",
+    a: "Finding trusted household staff in Barcelona can be challenging for expats unfamiliar with local systems, language, and labour regulations. BCN Ideal Services simplifies this by carefully selecting and matching experienced professionals, ensuring legal compliance and cultural alignment. Every placement is designed for long-term reliability, discretion, and peace of mind.",
+  },
+  {
+    q: "What kind of lifestyle management do UHNW clients expect in Barcelona?",
+    a: "UHNW clients in Barcelona typically expect a fully managed, discreet, and highly responsive lifestyle service. This includes household staff oversight, seasonal property preparation, travel coordination, restaurant and private bookings, and urgent request handling. BCN Ideal Services provides a single point of contact to manage all aspects of daily life seamlessly and privately.",
+  },
+  {
+    q: "Why do expats and UHNW families prefer managed services over hiring independently in Barcelona?",
+    a: "Many expats in Barcelona and UHNW households prefer managed services because they offer structure, legal compliance, and continuity. Instead of navigating contracts, recruitment, and supervision alone, clients rely on BCN Ideal Services to handle everything end-to-end. This ensures consistency, accountability, and a trusted support system that adapts as their needs evolve.",
   },
 ] as const;

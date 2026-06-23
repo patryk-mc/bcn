@@ -8,6 +8,7 @@ import { TeamPreview } from "@/components/home/TeamPreview";
 import { Testimonials } from "@/components/home/Testimonials";
 import { BlogPreview } from "@/components/home/BlogPreview";
 import { FinalCTA } from "@/components/home/FinalCTA";
+import { FAQ } from "@/components/home/FAQ";
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Testimonials />
       <BlogPreview />
       <FinalCTA />
+      <FAQ />
     </>
   );
 }

@@ -55,10 +55,10 @@ export function Nav() {
           </Link>
 
           {/* Divider */}
-          <span className="hidden md:block w-px h-6 bg-outline-variant/60" />
+          <span className="hidden lg:block w-px h-6 bg-outline-variant/60" />
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-1">
+          <ul className="hidden lg:flex items-center gap-1">
             {nav.map((item) => (
               <li key={item.href}>
                 <Link
@@ -87,7 +87,7 @@ export function Nav() {
           <Link
             href="/contact"
             className={cn(
-              "hidden md:inline-flex ml-1 items-center gap-2 px-5 py-2 rounded-full",
+              "hidden lg:inline-flex ml-1 items-center gap-2 px-5 py-2 rounded-full",
               "bg-primary text-white text-sm font-semibold tracking-wide",
               "shadow-[0_8px_20px_-6px_rgba(28,59,111,0.45)]",
               "hover:bg-primary-container transition-all hover:-translate-y-px active:scale-[0.98]"
@@ -99,7 +99,7 @@ export function Nav() {
           {/* Phone (compact CTA on mobile) */}
           <a
             href={`tel:${site.phoneRaw}`}
-            className="md:hidden ml-auto inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-[0_6px_16px_-4px_rgba(28,59,111,0.45)]"
+            className="lg:hidden ml-auto inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-[0_6px_16px_-4px_rgba(28,59,111,0.45)]"
             aria-label={`Call ${site.phone}`}
           >
             <Phone className="w-4 h-4" />
@@ -108,7 +108,7 @@ export function Nav() {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setOpen((o) => !o)}
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant text-primary"
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant text-primary"
             aria-label="Toggle menu"
             aria-expanded={open}
           >
@@ -124,7 +124,7 @@ export function Nav() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="md:hidden fixed inset-0 z-40 bg-primary/10 backdrop-blur-sm"
+            className="lg:hidden fixed inset-0 z-40 bg-primary/10 backdrop-blur-sm"
             onClick={() => setOpen(false)}
           >
             <motion.div

@@ -9,7 +9,7 @@ import { teamWithPhotos } from "@/lib/team-photos";
 export const metadata: Metadata = {
   title: "About us · Our team & values",
   description:
-    "The Filipino-led, Barcelona-based team behind BCN Ideal Services. Meet Lyn, Nina, Gezyll and Soledad.",
+    "The Filipino-led, Barcelona-based team behind BCN Ideal Services. Meet Lyn, Nina and Dexter.",
 };
 
 // Same brand-tonal palette as the home team preview.

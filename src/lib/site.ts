@@ -151,20 +151,12 @@ export const team = [
       "Keeps the office running. Interviews, hiring coordination, onboarding and the paperwork everyone forgets about.",
   },
   {
-    slug: "gezyll-ramirez",
-    name: "Gezyll Ramirez",
-    role: "Team Leader",
-    bio: "Hi! I am Gezyll Ramirez. As a team leader and support to the management, my role is to do the emergency purchases and other errands as needed to ensure no backlogs as well as support to the team.",
-    shortBio:
-      "Leads the field team. Handles emergencies, supply runs and the day-to-day support that keeps clients smiling.",
-  },
-  {
-    slug: "soledad-abella",
-    name: "Soledad Abella",
+    slug: "dexter-salas",
+    name: "Dexter Salas",
     role: "Social Media Marketing",
-    bio: "Soledad is BCN Ideal Services' social media manager. She has worked for years in social media and digital communications, and is the owner of social media agency Soulcial Marketing. Soledad loves working with and helping the Barcelona international community, where she lived for many years.",
+    bio: "Dexter looks after social media and digital marketing for BCN Ideal Services. A fuller bio is coming soon.",
     shortBio:
-      "Runs our social and digital. Owner of Soulcial Marketing and a long-time member of Barcelona's international community.",
+      "Looks after our social media and digital marketing. Full bio coming soon.",
   },
 ] as const;
 

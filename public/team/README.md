@@ -10,8 +10,7 @@ File names must match the team member slug in `src/lib/site.ts`:
 |-----------------------|---------------------------------------|
 | Lyn Lozano Galicia    | `lyn-lozano-galicia.jpg`              |
 | Nina Ruzel Paggao     | `nina-ruzel-paggao.jpg`               |
-| Gezyll Ramirez        | `gezyll-ramirez.jpg`                  |
-| Soledad Abella        | `soledad-abella.jpg`                  |
+| Dexter Salas          | `dexter-salas.jpg`                    |
 
 Supported extensions: `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`.
 

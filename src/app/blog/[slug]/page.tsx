@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { Reveal } from "@/components/Motion";
 import { getAllPosts, getPostSlugs, getRelatedPosts, loadPost } from "@/lib/blog";
+import { articleJsonLd, jsonLdToString, parseCustomJsonLd } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
@@ -50,8 +51,34 @@ export default async function BlogPostPage({
   }
   const related = getRelatedPosts(slug, 3);
 
+  const customJsonLd = parseCustomJsonLd(post.jsonld);
+
   return (
     <article>
+      {/* Structured data (schema.org) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdToString(
+            articleJsonLd({
+              kind: "blog",
+              slug,
+              title: post.title,
+              excerpt: post.excerpt,
+              date: post.date,
+              cover: post.cover,
+              author: post.author,
+            }),
+          ),
+        }}
+      />
+      {customJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdToString(customJsonLd) }}
+        />
+      )}
+
       {/* Hero */}
       <section className="relative pt-32 pb-12 md:pt-40 md:pb-16 overflow-hidden">
         <div className="absolute inset-0 z-0">

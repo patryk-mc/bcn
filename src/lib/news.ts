@@ -32,6 +32,8 @@ export type NewsItem = {
   cover: string;
   readingTimeMinutes: number;
   content: string;
+  /** Optional custom schema.org JSON-LD (raw string from frontmatter). */
+  jsonld?: string;
 };
 
 const NEWS_DIR = path.join(process.cwd(), "content", "news");
@@ -65,6 +67,7 @@ export function loadNewsItem(slug: string): NewsItem {
     cover: String(data.cover ?? "/photos/barcelona-1.jpg"),
     readingTimeMinutes: Math.max(1, Math.round(rt.minutes)),
     content,
+    jsonld: data.jsonld ? String(data.jsonld) : undefined,
   };
 }
 

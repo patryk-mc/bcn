@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { Reveal } from "@/components/Motion";
 import { getNewsSlugs, getRelatedNews, loadNewsItem } from "@/lib/news";
+import { articleJsonLd, jsonLdToString, parseCustomJsonLd } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
   return getNewsSlugs().map((slug) => ({ slug }));
@@ -50,8 +51,33 @@ export default async function NewsPostPage({
   }
   const related = getRelatedNews(slug, 3);
 
+  const customJsonLd = parseCustomJsonLd(item.jsonld);
+
   return (
     <article>
+      {/* Structured data (schema.org) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdToString(
+            articleJsonLd({
+              kind: "news",
+              slug,
+              title: item.title,
+              excerpt: item.excerpt,
+              date: item.date,
+              cover: item.cover,
+            }),
+          ),
+        }}
+      />
+      {customJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdToString(customJsonLd) }}
+        />
+      )}
+
       {/* Hero */}
       <section className="relative pt-32 pb-12 md:pt-40 md:pb-16 overflow-hidden">
         <div className="absolute inset-0 z-0">

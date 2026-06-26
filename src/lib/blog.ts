@@ -31,6 +31,8 @@ export type Post = {
   cover: string;
   readingTimeMinutes: number;
   content: string;
+  /** Optional custom schema.org JSON-LD (raw string from frontmatter). */
+  jsonld?: string;
 };
 
 const POSTS_DIR = path.join(process.cwd(), "content", "blog");
@@ -65,6 +67,7 @@ export function loadPost(slug: string): Post {
     cover: String(data.cover ?? "/photos/interior-1.jpg"),
     readingTimeMinutes: Math.max(1, Math.round(rt.minutes)),
     content,
+    jsonld: data.jsonld ? String(data.jsonld) : undefined,
   };
 }
 

@@ -15,7 +15,7 @@ const organization = {
   url: site.url,
   logo: {
     "@type": "ImageObject",
-    url: `${site.url}/logo/banner.png`,
+    url: `${site.url}/logo/bcn-logo.png`,
   },
 };
 

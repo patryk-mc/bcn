@@ -51,7 +51,7 @@ export function Nav() {
             className="pl-2 pr-1 md:pr-2 flex items-center gap-2 group"
             aria-label="BCN Ideal Services home"
           >
-            <Logo className="h-7 md:h-9" />
+            <Logo className="h-8 md:h-10" priority />
           </Link>
 
           {/* Divider */}

@@ -46,7 +46,7 @@ const ROUTES = [
   "/privacy",
   "/sitemap.xml",
   "/robots.txt",
-  "/icon.svg",
+  "/icon.png",
   "/opengraph-image",
 ];
 
@@ -307,7 +307,7 @@ async function contactFormTest(browser) {
 // ─── 7. Stress test ───────────────────────────────────────────────────
 async function stressTest() {
   head("7. Stress test (50 concurrent requests, p50 / p95)");
-  const targets = ROUTES.filter((r) => !["/icon.svg", "/opengraph-image", "/sitemap.xml", "/robots.txt"].includes(r));
+  const targets = ROUTES.filter((r) => !["/icon.png", "/opengraph-image", "/sitemap.xml", "/robots.txt"].includes(r));
   for (const r of targets) {
     const N = 50;
     const start = performance.now();

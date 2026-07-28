@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
+import { markDataUri } from "@/lib/logo-mark";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -34,10 +35,8 @@ export default async function OpenGraphImage() {
               justifyContent: "center",
             }}
           >
-            <svg width="36" height="36" viewBox="0 0 64 64">
-              <path d="M32 12 L54 32 L10 32 Z" fill="#ffffff" opacity="0.95" />
-              <rect x="16" y="32" width="32" height="22" rx="2" fill="none" stroke="#ffffff" strokeWidth="2.4" />
-            </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={markDataUri} width={38} height={38} alt="" />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", fontSize: 26, fontWeight: 700, letterSpacing: "0.04em" }}>

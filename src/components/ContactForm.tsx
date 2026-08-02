@@ -5,21 +5,15 @@ import { motion, AnimatePresence } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { ArrowRight, ArrowLeft, Check, Loader2, Sparkles, Building2, Diamond, BriefcaseBusiness } from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, Loader2, Sparkles, Building2, Diamond, BriefcaseBusiness, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { site } from "@/lib/site";
+import { quoteSchema, type QuoteValues } from "@/lib/quote-schema";
 
-const schema = z.object({
-  topic: z.string().min(1, "Please choose what you need"),
-  name: z.string().min(2, "Please tell us your name"),
-  email: z.string().email("Please use a valid email"),
-  phone: z.string().min(6, "Please include a phone number we can reach you on"),
-  area: z.string().min(2, "Where in Barcelona?"),
-  details: z.string().min(20, "A little more detail helps us give a useful quote"),
-  consent: z.literal(true, { error: "Please accept the privacy notice" }),
-});
+/** Shared with the server route so both validate identically. */
+const schema = quoteSchema;
 
-type FormValues = z.infer<typeof schema>;
+type FormValues = QuoteValues;
 
 const topics = [
   { value: "home-cleaning", label: "Home cleaning", icon: Sparkles, desc: "Weekly, bi-weekly or one-off cleans" },
@@ -33,6 +27,7 @@ export function ContactForm() {
   const initialTopic = searchParams.get("topic") ?? "";
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
 
   const {
     register,
@@ -59,12 +54,31 @@ export function ContactForm() {
   const prev = () => setStep((s) => Math.max(s - 1, 0));
 
   const onSubmit = async (values: FormValues) => {
-    // No backend wired. Shows a confirmation and logs to console for now.
-    await new Promise((r) => setTimeout(r, 800));
-    if (typeof window !== "undefined") {
-      console.info("[BCN] Contact form submission", values);
+    setSendError(null);
+
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        // Only claim success when the server actually accepted it. Anything
+        // else keeps the form filled in so nothing the visitor typed is lost.
+        setSendError(
+          data?.error ?? "Something went wrong. Please try again."
+        );
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSendError(
+        "We could not reach our server. Please check your connection and try again."
+      );
     }
-    setSubmitted(true);
   };
 
   if (submitted) {
@@ -93,6 +107,22 @@ export function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="rounded-[28px] border border-outline-variant/40 bg-white clean-elevation overflow-hidden"
     >
+      {/*
+        Honeypot. Hidden from people and screen readers, irresistible to bots.
+        Uses off-screen positioning rather than `display:none`, which more
+        bots know to skip.
+      */}
+      <div aria-hidden="true" className="absolute w-px h-px -left-[9999px] overflow-hidden">
+        <label htmlFor="company">Company (leave this empty)</label>
+        <input
+          id="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("company")}
+        />
+      </div>
+
       {/* Progress */}
       <div className="px-7 pt-7 pb-4 border-b border-outline-variant/40">
         <div className="flex items-center gap-2 mb-3">
@@ -254,6 +284,35 @@ export function ContactForm() {
           )}
         </AnimatePresence>
       </div>
+
+      {/*
+        Send failure. Shown in place rather than replacing the form, so the
+        visitor keeps everything they typed and has a working fallback.
+      */}
+      {sendError && (
+        <div
+          role="alert"
+          className="mx-7 md:mx-10 mb-6 flex items-start gap-3 rounded-2xl border border-error/30 bg-error/5 p-4"
+        >
+          <AlertCircle className="w-5 h-5 text-error shrink-0 mt-0.5" />
+          <div className="text-sm">
+            <p className="font-semibold text-error">{sendError}</p>
+            <p className="text-on-surface-variant mt-1">
+              Your details are still here, so you can try again. If it keeps
+              failing,{" "}
+              <a
+                className="text-primary underline font-medium"
+                href={`https://wa.me/${site.whatsapp.replace(/[^0-9]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp us on {site.phone}
+              </a>{" "}
+              and we will pick it up straight away.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Footer with nav */}
       <div className="px-7 md:px-10 py-5 border-t border-outline-variant/40 bg-surface-container-low flex items-center justify-between">

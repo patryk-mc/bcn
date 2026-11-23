@@ -4,6 +4,7 @@ import { ServicesOverview } from "@/components/home/ServicesOverview";
 import { MissionValues } from "@/components/home/MissionValues";
 import { VideoShowreel } from "@/components/home/VideoShowreel";
 import { ProcessPreview } from "@/components/home/ProcessPreview";
+import { AwardsSpotlight } from "@/components/home/AwardsSpotlight";
 import { TeamPreview } from "@/components/home/TeamPreview";
 import { Testimonials } from "@/components/home/Testimonials";
 import { BlogPreview } from "@/components/home/BlogPreview";
@@ -19,6 +20,7 @@ export default function HomePage() {
       <MissionValues />
       <VideoShowreel />
       <ProcessPreview />
+      <AwardsSpotlight />
       <TeamPreview />
       <Testimonials />
       <BlogPreview />
